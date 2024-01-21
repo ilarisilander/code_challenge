@@ -2,79 +2,81 @@
 
 import os
 import argparse
+from CustomExceptions import InvalidExtentionError
 
 
 class TextFile:
-    """ Perform operations on the text file itself  """
+    """ Perform operations on the text file itself """
     def __init__(self, path: str) -> None:
         self.path = path
         self.name = ""
 
     def read_content(self) -> list:
-        """ Create a list from each word in a text file 
-        
-        Return: list
-        """
-        with open(self.file_path, 'r') as file:
+        """ Create a list from each word in a text file """
+        with open(self.path, 'r') as file:
             content = file.read()
-            #print(content)
+            print(content)
 
-    def extract_name_from_path(self) -> str:
-        """ Remove prefix and path
-        
-        Return: str: file name
-        """
+    def get_name_from_file_path(self):
+        """ Remove prefix and path """
+        file = os.path.basename(self.path)
+        file_name = os.path.splitext(file)[0]
         return file_name
-    
+
     def set_name(self, name):
         self.name = name
 
 
-class InputArguments:
+class TerminalArgument:
     """ Handle the arguments from the terminal """
     def __init__(self) -> None:
-        self.input_argument = ""
-
-    def parse_arguments():
-        arg_parser = argparse.ArgumentParser(description='WordCounter is an application that count the words in a text file')
-        arg_parser.add_argument('--file_path', type=str, help='Path to file', required=True)
-        arguments = arg_parser.parse_args()
-        return arguments
-    
-    def set_input_argument(self, input_argument):
-        if os.path.isfile(input_argument):
-            self.input_argument = input_argument
-        
-    def get_input_argument(self):
-        return self.input_argument
-    
-    def validate_arguments(self, arguments):
-        # Check if arguments contains only one argument
-        if self.contains_one_argument(arguments)
-        # Check if argument is a valid path
-
-        # Check if argument is a file
         pass
+
+    def is_valid_argument(self, argument: str) -> bool:
+        """ Check if the argument is a valid according to specifications """
+        if not os.path.exists(argument):
+            raise FileNotFoundError(f'{argument} does not exist')
+        if not os.path.abspath(argument):
+            raise ValueError(f'{argument} must be an absolute path')
+        if not os.path.isfile(argument):
+            raise ValueError(f'{argument} does not contain a file')
+        if not self.is_valid_extension(argument):
+            raise InvalidExtentionError(f'{argument} has the wrong extension')
+        return True
 
     @staticmethod
-    def contains_one_argument(arguments) -> bool:
-        """ Argument must only contain one argument"""
-        pass
+    def is_valid_extension(file_path) -> bool:
+        """ File extension must be .txt """
+        if file_path.lower().endswith('.txt'):
+            return True
+        False
 
-class Word:
-    """ Search for the specific word inside the text file """
-    def __init__(self) -> None:
-        pass
+    @staticmethod
+    def parse_arguments() -> str:
+        """ Retrieve the file path from the incoming terminal arguments """
+        arg_parser = argparse.ArgumentParser(
+            description='An application to count the specific word in a file'
+        )
 
-    def find_word(self):
-        pass
+        arg_parser.add_argument(
+            '--file_path',
+            type=str,
+            help='Path to file',
+            required=True
+        )
+
+        argument = arg_parser.parse_args()
+        return argument.file_path
 
 
 def main():
-    input_arguments = InputArguments()
-    parsed_args = input_arguments.parse_arguments()
-    text_file = TextFile(parsed_args.file_path)
-    text_file.read_content()
+    terminal_argument = TerminalArgument()
+    parsed_args = terminal_argument.parse_arguments()
+    if terminal_argument.is_valid_argument(parsed_args):
+        text_file = TextFile(parsed_args)
+        file_name = text_file.get_name_from_file_path()
+        text_file.set_name(file_name)
+        text_file.read_content()
 
 
 if __name__ == "__main__":
