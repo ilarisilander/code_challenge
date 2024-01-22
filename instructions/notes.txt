@@ -1,0 +1,43 @@
+INSTRUCTIONS
+############
+-   I wrote the application in Python since that's my main language and I was recommended to do so.
+-   Will try to do it in C# or F# also (haven't really programmed in those languages before).
+
+
+REQUIREMENTS
+############
+"Write a console program that takes one argument, a path to a file.
+Open that file and count how many times its filename (minus the file extension) occurs in the file's contents.
+Example: If the argument is "myfile.txt" it should count how many times the string "myfile" occurs in it."
+
+
+Input args:
+-   Should it be able to take more than .txt files?
+    My assumption and decision is to only use .txt files.
+
+-   What should happen if there is no argument when executed?
+    This is handled by the arg parser.
+
+-   If there is more than one argument?
+
+
+Word search:
+-   If the name of the file is foot.txt, it doesn't clarifiy in the instructions if these count as a "hit":
+    "foot" -> character before and after the actual word. Could be ' and () also.
+    football -> word is a part of another word
+    foot. -> word has a trailing symbol. Could be ! . , : or any other symbol.
+    Foot/FOOT -> capital/lower letters and so on...
+    
+    My assumption is that all hits will be detected.
+    This could be a bit tricky to fully test. Might have to think about that
+
+
+Path:
+-   Should it work with a relative path or only full path?
+
+-   Some systems have / in path and some have \ and I need to handle both.
+
+Test cases:
+-   If possible, I like to write my unit tests without any file dependencies, but for this one
+    I will use a word_file.txt as a test file instead of hard coding the input.
+    At least for now.

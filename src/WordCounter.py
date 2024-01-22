@@ -77,6 +77,7 @@ def main():
         file_name = text_file.get_name_from_file_path()
         text_file.set_name(file_name)
         text_file.read_content()
+        print(text_file.name)
 
 
 if __name__ == "__main__":
