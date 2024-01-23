@@ -2,7 +2,7 @@
 
 import os
 import argparse
-from CustomExceptions import InvalidExtentionError
+from CustomExceptions import InvalidExtensionError
 
 
 class TextFile:
@@ -27,21 +27,19 @@ class TextFile:
         self.name = name
 
 
-class TerminalArgument:
+class InputArgument:
     """ Handle the arguments from the terminal """
     def __init__(self) -> None:
         pass
 
     def is_valid_argument(self, argument: str) -> bool:
         """ Check if the argument is a valid according to specifications """
-        if not os.path.exists(argument):
-            raise FileNotFoundError(f'{argument} does not exist')
         if not os.path.abspath(argument):
             raise ValueError(f'{argument} must be an absolute path')
         if not os.path.isfile(argument):
             raise ValueError(f'{argument} does not contain a file')
         if not self.is_valid_extension(argument):
-            raise InvalidExtentionError(f'{argument} has the wrong extension')
+            raise InvalidExtensionError(f'{argument} has the wrong extension')
         return True
 
     @staticmethod
@@ -53,7 +51,7 @@ class TerminalArgument:
 
     @staticmethod
     def parse_arguments() -> str:
-        """ Retrieve the file path from the incoming terminal arguments """
+        """ Retrieve the file path from the incoming input arguments """
         arg_parser = argparse.ArgumentParser(
             description='An application to count the specific word in a file'
         )
@@ -70,9 +68,9 @@ class TerminalArgument:
 
 
 def main():
-    terminal_argument = TerminalArgument()
-    parsed_args = terminal_argument.parse_arguments()
-    if terminal_argument.is_valid_argument(parsed_args):
+    input_argument = InputArgument()
+    parsed_args = input_argument.parse_arguments()
+    if input_argument.is_valid_argument(parsed_args):
         text_file = TextFile(parsed_args)
         file_name = text_file.get_name_from_file_path()
         text_file.set_name(file_name)
