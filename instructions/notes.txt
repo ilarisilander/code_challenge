@@ -15,8 +15,10 @@ Input args:
 -   Should it be able to take more than .txt files?
     My assumption and decision is to only use .txt files.
 
+-   The validator should validate for capital letters also
+
 -   What should happen if there is no argument when executed?
-    This is handled by the arg parser.
+    This is handled by the arg parser with the "required" option
 
 -   If there is more than one argument?
 
