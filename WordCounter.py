@@ -3,8 +3,8 @@
 import sys
 import logging
 
-from CommandLine import InputArgument
-from Files import TextFile
+from libraries.CommandLine import InputArgument
+from libraries.Files import TextFile
 
 
 def main():
@@ -26,7 +26,7 @@ def main():
         text_file.set_name(file_name)
         content_list = text_file.file_content_to_list()
         word_counter = text_file.count_words_in_list(content_list)
-        print(word_counter)
+        text_file.print_word_count(word_counter)
 
 
 if __name__ == "__main__":

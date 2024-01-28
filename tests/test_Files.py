@@ -3,9 +3,7 @@
 import unittest
 
 from libraries.Files import TextFile
-from unittest.mock import patch, MagicMock
-
-MODULE_PATH = 'libraries.Files.'
+from unittest.mock import patch
 
 
 class TestTextFile(unittest.TestCase):
@@ -35,5 +33,12 @@ class TestTextFile(unittest.TestCase):
     def test_get_name_from_file_path(self):
         expected = 'dummy_file'
         actual = self.text_file.get_name_from_file_path()
+
+        self.assertEqual(expected, actual)
+
+    def test_set_name(self):
+        expected = 'new_name'
+        self.text_file.set_name('new_name')
+        actual = self.text_file.name
 
         self.assertEqual(expected, actual)

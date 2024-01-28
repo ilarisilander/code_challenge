@@ -34,6 +34,9 @@ class TextFile:
                 counter += 1
         return counter
 
+    def print_word_count(self, counter: int):
+        print(f'The word "{self.name}" appeared {counter} times')
+
 
 if __name__ == '__main__':
     # I leave this if statement because it will prevent

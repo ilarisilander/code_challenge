@@ -15,6 +15,18 @@ class TestInputArgument(unittest.TestCase):
         self.example_txt_path = 'c:/dummy_path/example.txt'
         self.invalid_ext = 'invalid_extension.jpeg'
 
+    def test_file_has_no_spaces_return_true(self):
+        """ File name has no spaces in the name """
+        input_name = 'file_name_without_spaces.txt'
+        result = self.input_argument.file_has_no_spaces(input_name)
+        self.assertTrue(result)
+
+    def test_file_has_no_spaces_return_false(self):
+        """ File name has spaces in the file name """
+        input_name = 'file name with spaces.txt'
+        result = self.input_argument.file_has_no_spaces(input_name)
+        self.assertFalse(result)
+
     ###################
     # valid_extension #
     ###################
@@ -23,11 +35,6 @@ class TestInputArgument(unittest.TestCase):
         test_input = self.dummy_path + 'example.txt'
         result = self.input_argument.is_valid_extension(test_input)
         self.assertTrue(result)
-
-    # def test_valid_extension_capital_letters_return_true(self):
-    #     test_input = self.dummy_path + 'EXAMPLE.TXT'
-    #     result = self.input_argument.is_valid_extension(test_input)
-    #     self.assertTrue(result)
 
     def test_valid_extension_return_false(self):
         test_input = self.dummy_path + 'example.jpeg'
@@ -44,15 +51,17 @@ class TestInputArgument(unittest.TestCase):
     # is_valid_argument #
     #####################
 
+    @patch(MODULE_PATH + 'InputArgument.file_has_no_spaces')
     @patch('os.path.isfile')
     @patch(MODULE_PATH + 'InputArgument.is_valid_extension')
     def test_is_valid_argument_happy_path(self, mock_is_valid_extension,
-                                          mock_isfile):
+                                          mock_isfile, mock_file_has_no_spaces):
 
         """ All checks should pass """
 
         mock_isfile.return_value = True
         mock_is_valid_extension.return_value = True
+        mock_file_has_no_spaces.return_value = True
 
         result = self.input_argument.is_valid_argument(self.example_txt_path)
 
@@ -96,3 +105,28 @@ class TestInputArgument(unittest.TestCase):
         self.assertEqual(expected, actual)
         mock_isfile.assert_called_once_with(self.invalid_ext)
         mock_is_valid_extension.assert_called_once_with(self.invalid_ext)
+
+    @patch(MODULE_PATH + 'InputArgument.file_has_no_spaces')
+    @patch('os.path.isfile')
+    @patch(MODULE_PATH + 'InputArgument.is_valid_extension')
+    def test_is_valid_argument_has_spaces(self, mock_is_valid_extension,
+                                           mock_isfile, mock_file_has_no_spaces):
+
+        """ File name has a space character in it's name """
+
+        path_input = 'spaces in file name.txt'
+
+        mock_isfile.return_value = True
+        mock_is_valid_extension.return_value = True
+        mock_file_has_no_spaces.return_value = False
+
+        with self.assertRaises(ValueError) as context:
+            self.input_argument.is_valid_argument(path_input)
+
+        actual = str(context.exception)
+        expected = 'spaces in file name.txt has spaces in file name'
+
+        self.assertEqual(actual, expected)
+        mock_isfile.assert_called_once_with(path_input)
+        mock_is_valid_extension.assert_called_once_with(path_input)
+        mock_file_has_no_spaces.assert_called_once_with(path_input)
