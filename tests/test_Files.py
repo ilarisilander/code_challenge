@@ -12,6 +12,12 @@ class TestTextFile(unittest.TestCase):
         self.text_file = TextFile('c:/dummy_path/dummy_file.txt')
         self.text_file.name = 'dummy_file'
 
+    @patch('builtins.print')
+    def test_print_word_count(self, mock_print):
+        message = 'The word "dummy_file" appeared 5 times'
+        self.text_file.print_word_count(5)
+        mock_print.assert_called_once_with(message)
+
     def test_count_words_in_list(self):
         test_list = ['dummy_file', '"dummy_file"', '(dummy_file)',
                      'hello', 'world', 'hello_DUMMY_FILE']

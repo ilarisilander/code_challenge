@@ -93,3 +93,19 @@ python WordCounter.py --help
 ```bash
 python WordCounter.py --file_path c:/path/to/text_file.txt
 ```
+
+### Run the test cases
+Given that you are in the root folder of the project (code_challenge)
+* Run with coverage (all tests)
+  ```bash
+  coverage run -m unittest tests/test*
+  ```
+* Run with coverage (single test file)
+  ```bash
+  coverage run -m unittest tests/test_CommandLine.py
+  coverage run -m unittest tests/test_Files.py
+  ```
+* Run without coverage (all files)
+  ```bash
+  python -m unittest tests/test*
+  ```
