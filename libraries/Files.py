@@ -1,6 +1,7 @@
 """ Module to handle files """
 
 import os
+import re
 
 
 class TextFile:
@@ -9,11 +10,12 @@ class TextFile:
         self.path = path
         self.name = ""
 
-    def read_content(self) -> list:
+    def file_content_to_list(self) -> list:
         """ Create a list from each word in a text file """
-        with open(self.path, 'r') as file:
+        with open(self.path, 'r', encoding='utf-8') as file:
             content = file.read()
-            print(content)
+            word_list = re.split(r'\s+', content)  # remove spaces and new line
+            return word_list
 
     def get_name_from_file_path(self):
         """ Remove prefix and path """
@@ -24,6 +26,16 @@ class TextFile:
     def set_name(self, name):
         self.name = name
 
+    def count_words_in_list(self, word_list: list) -> int:
+        """ Count how many times the file name appears in the word list """
+        counter = 0
+        for word in word_list:
+            if self.name.lower() in word.lower():
+                counter += 1
+        return counter
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
+    # I leave this if statement because it will prevent
+    # accidental code executions when importing this module.
     pass

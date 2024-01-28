@@ -24,14 +24,24 @@ Input args:
 
 
 Word search:
--   If the name of the file is foot.txt, it doesn't clarifiy in the instructions if these count as a "hit":
+-   Instructions does not clarify special characters in the file name:
+    If file name is foot.txt
     "foot" -> character before and after the actual word. Could be ' and () also.
     football -> word is a part of another word
     foot. -> word has a trailing symbol. Could be ! . , : or any other symbol.
+    .foot -> leading symbol, same as above.
     Foot/FOOT -> capital/lower letters and so on...
     
     My assumption is that all hits will be detected.
     This could be a bit tricky to fully test. Might have to think about that
+
+
+Visualization:
+-   The instructions does not specify HOW we should display the amount of times
+    that the word appears in the document.
+
+-   I decide to print it out to the user in the terminal in this fashion.
+    The word [fetch name from file object] appeared [x] times in [file_name.txt]
 
 
 Path:
@@ -39,7 +49,12 @@ Path:
 
 -   Some systems have / in path and some have \ and I need to handle both.
 
+
 Test cases:
 -   If possible, I like to write my unit tests without any file dependencies, but for this one
     I will use a word_file.txt as a test file instead of hard coding the input.
     At least for now.
+
+
+Exception handling:
+-   When it comes to exception handling

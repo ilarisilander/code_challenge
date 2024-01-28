@@ -6,23 +6,19 @@ import os
 
 class InputArgument:
     """ Handle the arguments from the terminal """
-    def __init__(self) -> None:
-        pass
 
     def is_valid_argument(self, argument: str) -> bool:
         """ Check if the argument is a valid according to specifications """
-        if not os.path.abspath(argument):
-            raise ValueError(f'{argument} must be an absolute path')
         if not os.path.isfile(argument):
-            raise ValueError(f'{argument} does not contain a file')
+            raise ValueError(f'{argument} path is invalid')
         if not self.is_valid_extension(argument):
             raise ValueError(f'{argument} has the wrong extension')
         return True
 
     @staticmethod
-    def is_valid_extension(file_path) -> bool:
-        """ File extension in the path  must be .txt """
-        if file_path.lower().endswith('.txt'):
+    def is_valid_extension(file_path: str) -> bool:
+        """ File extension in the path must be .txt """
+        if file_path.endswith('.txt'):
             return True
         False
 
@@ -41,8 +37,10 @@ class InputArgument:
         )
 
         argument = arg_parser.parse_args()
-        return argument.file_path
+        return argument.file_path.lower()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+    # I leave this if statement because it will prevent
+    # accidental code executions when importing this module.
     pass

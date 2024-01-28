@@ -13,6 +13,7 @@ class TestInputArgument(unittest.TestCase):
         self.input_argument = InputArgument()
         self.dummy_path = 'c:/dummy_path/'
         self.example_txt_path = 'c:/dummy_path/example.txt'
+        self.invalid_ext = 'invalid_extension.jpeg'
 
     ###################
     # valid_extension #
@@ -23,10 +24,10 @@ class TestInputArgument(unittest.TestCase):
         result = self.input_argument.is_valid_extension(test_input)
         self.assertTrue(result)
 
-    def test_valid_extension_capital_letters_return_true(self):
-        test_input = self.dummy_path + 'EXAMPLE.TXT'
-        result = self.input_argument.is_valid_extension(test_input)
-        self.assertTrue(result)
+    # def test_valid_extension_capital_letters_return_true(self):
+    #     test_input = self.dummy_path + 'EXAMPLE.TXT'
+    #     result = self.input_argument.is_valid_extension(test_input)
+    #     self.assertTrue(result)
 
     def test_valid_extension_return_false(self):
         test_input = self.dummy_path + 'example.jpeg'
@@ -43,62 +44,55 @@ class TestInputArgument(unittest.TestCase):
     # is_valid_argument #
     #####################
 
-    @patch('os.path.abspath')
     @patch('os.path.isfile')
     @patch(MODULE_PATH + 'InputArgument.is_valid_extension')
     def test_is_valid_argument_happy_path(self, mock_is_valid_extension,
-                                          mock_isfile, mock_abspath):
+                                          mock_isfile):
 
         """ All checks should pass """
 
-        mock_abspath.return_value = True
         mock_isfile.return_value = True
         mock_is_valid_extension.return_value = True
 
         result = self.input_argument.is_valid_argument(self.example_txt_path)
 
         self.assertTrue(result)
-        mock_abspath.assert_called_once_with(self.example_txt_path)
         mock_isfile.assert_called_once_with(self.example_txt_path)
         mock_is_valid_extension.assert_called_once_with(self.example_txt_path)
 
-    @patch('os.path.abspath')
-    @patch('os.path.isfile')
-    @patch(MODULE_PATH + 'InputArgument.is_valid_extension')
-    def test_is_valid_argument_invalid_abspath(self, mock_is_valid_extension,
-                                               mock_isfile, mock_abspath):
-        """ Abspath check should throw an exception """
-
-        mock_abspath.return_value = False  # Simulate an invalid path
-
-        with self.assertRaises(ValueError) as context:
-            self.input_argument.is_valid_argument('invalid_path.txt')
-
-        actual = str(context.exception)
-        expected = 'invalid_path.txt must be an absolute path'
-
-        self.assertEqual(expected, actual)
-        mock_abspath.assert_called_once_with('invalid_path.txt')
-        mock_isfile.assert_not_called()
-        mock_is_valid_extension.assert_not_called()
-
-    @patch('os.path.abspath')
     @patch('os.path.isfile')
     @patch(MODULE_PATH + 'InputArgument.is_valid_extension')
     def test_is_valid_argument_not_a_file(self, mock_is_valid_extension,
-                                          mock_isfile, mock_abspath):
+                                          mock_isfile):
         """ Is file check should throw an exception """
 
-        mock_abspath.return_value = True
         mock_isfile.return_value = False
 
         with self.assertRaises(ValueError) as context:
             self.input_argument.is_valid_argument('invalid_path.txt')
 
         actual = str(context.exception)
-        expected = 'invalid_path.txt does not contain a file'
+        expected = 'invalid_path.txt path is invalid'
 
         self.assertEqual(expected, actual)
-        mock_abspath.assert_called_once_with('invalid_path.txt')
         mock_isfile.assert_called_once_with('invalid_path.txt')
         mock_is_valid_extension.assert_not_called()
+
+    @patch('os.path.isfile')
+    @patch(MODULE_PATH + 'InputArgument.is_valid_extension')
+    def test_is_valid_argument_wrong_extension(self, mock_is_valid_extension,
+                                               mock_isfile):
+        """ Is valid extension check should throw an exception """
+
+        mock_isfile.return_value = True
+        mock_is_valid_extension.return_value = False
+
+        with self.assertRaises(ValueError) as context:
+            self.input_argument.is_valid_argument(self.invalid_ext)
+
+        actual = str(context.exception)
+        expected = 'invalid_extension.jpeg has the wrong extension'
+
+        self.assertEqual(expected, actual)
+        mock_isfile.assert_called_once_with(self.invalid_ext)
+        mock_is_valid_extension.assert_called_once_with(self.invalid_ext)
