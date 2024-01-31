@@ -1,0 +1,5 @@
+NAMESPACE
+#########
+-   I think that "ConsoleApp1 isn't really a describing namespace, so I'm changing that to something
+    more suitable
+

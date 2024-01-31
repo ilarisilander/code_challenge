@@ -57,7 +57,7 @@ the file name appears in the text file.
     * I try to make the code easy to test. To make it in small chunks of code
   
   * #### Exception handling
-    ##### Things that I decided to inlude in exception handling
+    ##### Things that I decided to include in exception handling
     * If the user inserts a path that does not have a file in the base of the path
     * To check that the file has .txt as extension
     * The user could add a path with spaces in the file name
