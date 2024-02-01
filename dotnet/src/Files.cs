@@ -5,15 +5,15 @@ using System.Text;
 
 namespace WordCounter
 {
-    public class Files
+    public class TextFile
     {
         private string path;
         private string name;
 
-        public Files(string path)
+        public void Files(string path)
         {
             this.path = path;
-            this.name = Path.GetFileNameWithoutExtension(path)
+            this.name = Path.GetFileNameWithoutExtension(path);
         }
 
         public string[] FileContentToArray()
@@ -38,14 +38,11 @@ namespace WordCounter
             return counter;
         }
 
-        public string GetName()
+        public void PrintWordCount(int counter)
         {
-            return this.name;
+            Console.WriteLine($"The word {this.name} appeared {counter} times");
         }
 
-        public void SetName(string name)
-        {
-            this.name = name;
-        }
+        public string Name { get; set; }
     }
 }
