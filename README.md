@@ -105,6 +105,10 @@ Given that you are in the root folder of the project (code_challenge)
   coverage run -m unittest tests/test_CommandLine.py
   coverage run -m unittest tests/test_Files.py
   ```
+* Show the coverage report
+  ```bash
+  coverage report
+  ```
 * Run without coverage (all files)
   ```bash
   python -m unittest tests/test*

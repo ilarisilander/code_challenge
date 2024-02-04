@@ -1,25 +1,24 @@
 using System;
 using System.IO;
-using System.Text;
 
 
 namespace WordCounter
 {
     public class TextFile
     {
-        private string path;
-        private string name;
+        private readonly string filePath;
+        private readonly string fileName;
 
-        public void Files(string path)
+        public TextFile(string filePath)
         {
-            this.path = path;
-            this.name = Path.GetFileNameWithoutExtension(path);
+            this.filePath = filePath;
+            FileName = Path.GetFileNameWithoutExtension(filePath);
         }
 
         public string[] FileContentToArray()
         {
             char[] separators = {' ', '\n', '\r', '\t'};
-            string contentString = File.ReadAllText(this.path, System.Text.Encoding.UTF8);
+            string contentString = File.ReadAllText(FilePath, System.Text.Encoding.UTF8);
             string[] words = contentString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
             return words;
@@ -30,7 +29,7 @@ namespace WordCounter
             int counter = 0;
             for(int i = 0; i < words.Length; i++)
             {
-                if(words[i].ToLower() == this.name.ToLower())
+                if(words[i].Equals(FileName, StringComparison.OrdinalIgnoreCase))
                 {
                     counter++;
                 }
@@ -40,9 +39,10 @@ namespace WordCounter
 
         public void PrintWordCount(int counter)
         {
-            Console.WriteLine($"The word {this.name} appeared {counter} times");
+            Console.WriteLine($"The word {FileName} appeared {counter} times");
         }
 
-        public string Name { get; set; }
+        public string FileName { get; }
+        public string FilePath { get; }
     }
 }

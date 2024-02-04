@@ -1,5 +1,32 @@
+Ok, so after some thoughts, I decided to make the same program in C#.
+I like challenges, and I have never programmed in C#, so I basically
+used the same design as I used in the Python version, to save time and to see
+what differences I could find.
+
+This is what I found.
+
 NAMESPACE
 #########
--   I think that "ConsoleApp1 isn't really a describing namespace, so I'm changing that to something
-    more suitable
+    Python: I usually gather several classes into one file, and then that file would
+            pretty much be the namespace when importing it to other programs.
+    Csharp: In C# it seems to be pretty common to have one file for each class.
+            Then by using the namespace, we know what files belong together.
 
+
+NAME EXTENSION
+##############
+-   C# has this cool function in a Path namespace that I found.
+    I will explain the differences between Python and C#.
+
+    Python: In python to fetch the name, I remove the file itself, with the
+            extension, from the path itself.
+            After that I remove the extension from the file name.
+    Csharp: In C#, I can remove the name itself, without the extension, with
+            a built in function in the Path namespace.
+            That was pretty cool.
+
+
+GET SET
+#######
+-   Noticed that C# is using get; set; in the same function instead of the
+    regular getters and setters from other programming languages, such as Java.
