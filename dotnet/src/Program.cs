@@ -7,6 +7,7 @@ namespace WordCounter
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(args[0]);
             bool validArgument = false;
 
             try

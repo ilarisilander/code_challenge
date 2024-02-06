@@ -11,7 +11,7 @@ namespace WordCounter
 
         public TextFile(string filePath)
         {
-            this.filePath = filePath;
+            FilePath = filePath;
             FileName = Path.GetFileNameWithoutExtension(filePath);
         }
 
