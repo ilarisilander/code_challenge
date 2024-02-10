@@ -30,3 +30,14 @@ GET SET
 #######
 -   Noticed that C# is using get; set; in the same function instead of the
     regular getters and setters from other programming languages, such as Java.
+
+
+COUNT WORDS
+###########
+-   Initially, it seems like the counting of words does not happen
+    as automatically as it does in Python.
+-   The program is currently not catching words that have special characters
+    around the word
+-   So, I found another function called "Contains" instead of using "Equals".
+    Equals will compare the strings straight up while Contains will check if the 
+    string contains the word that we are looking for.

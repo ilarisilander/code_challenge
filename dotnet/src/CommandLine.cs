@@ -11,7 +11,7 @@ namespace WordCounter
             {   
                 if(args.Length < 1)
                 {
-                    throw new ArgumentException($"Run program with a path as argument");
+                    throw new ArgumentException($"Path was not provided as argument");
                 }
                 if(args.Length > 1)
                 {

@@ -29,7 +29,7 @@ namespace WordCounter
             int counter = 0;
             for(int i = 0; i < words.Length; i++)
             {
-                if(words[i].Equals(FileName, StringComparison.OrdinalIgnoreCase))
+                if(words[i].Contains(FileName, StringComparison.OrdinalIgnoreCase))
                 {
                     counter++;
                 }
