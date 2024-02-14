@@ -1,0 +1,97 @@
+Ok, so after some thoughts, I decided to make the same program in C#.
+I like challenges, and I have never programmed in C#, so I basically
+used the same architecture as I used in the Python version, to save time and to see
+what differences I could find.
+
+This is what I found.
+
+STRINGS
+#######
+    Python: It's very common to use single quotation marks like this ' for strings.
+            You can use " or ' and it doesn't really make a difference.
+    Csharp: I ran into issues when using ' instead of ".
+    Conclusion: I will probably have to start using " as my "goto" in Python also.
+
+
+SEMI COLON
+##########
+-   I thought that this would become an issue, finding a lot of forgotten semi colons
+    in the code, but to my surprise, it became very natural very quickly;  <- see! automatically! ;D
+
+
+NAMESPACE
+#########
+    Python: I usually gather several classes into one file, and then that file would
+            pretty much be the namespace when importing it to other programs.
+    Csharp: In C# it seems to be common to have one file for each class.
+            Then by using the namespace, we know what files belong together.
+
+
+NAME EXTENSION
+##############
+-   C# has this cool function in a Path namespace that I found.
+    I will explain the differences between Python and C#.
+
+    Python: In python to fetch the name, I extract the file itself, with the
+            extension, from the path (eg. word_file.txt).
+            After that I remove the extension from the file name (word_file).
+    Csharp: In C#, I can remove the name itself, without the extension, with
+            a built in function in the Path namespace.
+            That was pretty cool.
+
+
+GET SET
+#######
+-   Noticed that C# is using get; set; in the same function instead of the
+    regular getters and setters from other programming languages, such as Java.
+-   Discovered something with this "new" way of writing getters and setters.
+    When writing regular getters and setters, you will modify the "fields" or
+    "attributes" of the class itself (not inside the constructor).
+    
+    As I understand it, this oneliner, "public string FileName { get; }", is a pretty new way 
+    of writing getters and setters.
+    It will modify the FileName that is inside the constructor instead, thus making the class
+    variables unused.
+
+
+COUNT WORDS
+###########
+-   Initially, it seems like the counting of words does not happen
+    as automatically as it does in Python.
+-   So, I found another function called "Contains" instead of using "Equals".
+    Equals will compare the strings straight up while Contains will check if the 
+    string contains the word that we are looking for.
+
+
+THOUGHTS AFTER COMPLETION
+#########################
+-   Now, while writing, I have completed the program itself. It works the same way as the 
+    Python version, but I have not made the unit tests yet.
+-   All in all, the architecture is pretty much maintained between the languages with some 
+    small differences.
+
+-   I'm used to work with VS Code when programming and I wanted to use VS Code when doing
+    C# also.
+    I'm pretty sure that Visual Studio would be a lot easier to start with.
+    It took a bit of time to setup VS Code to function with debugging and so on.
+    The effectiveness of cleaning and compiling/building the project with the help
+    of a terminal (bash) can of course be improved.
+    
+-   I wanted to do one F# version also, but my time is limited, so I will 
+    have to do the F# version later.
+
+
+TESTING
+#######
+-   I'm using xunit for the unit tests.
+-   Installing the xunit package.
+    1. CWD is the dir where you have the csproj file
+    2. run this command: dotnet add package xunit
+    3. After modifying/adding packages, run: dotnet restore
+
+
+COMMANDS
+########
+-   dotnet build = build the project
+-   dotnet clean = clean build outputs of a .NET project.
+-   dotnet restore = when you do a change in the dependencies document

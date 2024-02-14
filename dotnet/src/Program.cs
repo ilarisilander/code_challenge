@@ -22,7 +22,8 @@ namespace WordCounter
             if(validArgument == true)
             {
                 TextFile textFile = new(args[0]);
-                string[] contentArray = textFile.FileContentToArray();
+                string contentString = textFile.FileContentToString();
+                string[] contentArray = TextFile.ParseStringToArray(contentString);
                 int wordCount = textFile.CountWordsInArray(contentArray);
                 textFile.PrintWordCount(wordCount);
             }

@@ -6,8 +6,8 @@ namespace WordCounter
 {
     public class TextFile
     {
-        private readonly string filePath;
-        private readonly string fileName;
+        public string FileName { get; }
+        public string FilePath { get; }
 
         public TextFile(string filePath)
         {
@@ -15,12 +15,16 @@ namespace WordCounter
             FileName = Path.GetFileNameWithoutExtension(filePath);
         }
 
-        public string[] FileContentToArray()
+        public string FileContentToString()
         {
-            char[] separators = {' ', '\n', '\r', '\t'};
             string contentString = File.ReadAllText(FilePath, System.Text.Encoding.UTF8);
-            string[] words = contentString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            return contentString;
+        }
 
+        public static string[] ParseStringToArray(string fileContent)
+        {
+            char[] separators = [' ', '\n', '\r', '\"'];
+            string[] words = fileContent.Split(separators, StringSplitOptions.RemoveEmptyEntries);
             return words;
         }
 
@@ -42,7 +46,6 @@ namespace WordCounter
             Console.WriteLine($"The word {FileName} appeared {counter} times");
         }
 
-        public string FileName { get; }
-        public string FilePath { get; }
+
     }
 }
