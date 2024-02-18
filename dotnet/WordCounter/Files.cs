@@ -6,8 +6,8 @@ namespace WordCounter
 {
     public class TextFile
     {
-        public string FileName { get; }
-        public string FilePath { get; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
 
         public TextFile(string filePath)
         {

@@ -44,6 +44,7 @@ GET SET
 #######
 -   Noticed that C# is using get; set; in the same function instead of the
     regular getters and setters from other programming languages, such as Java.
+
 -   Discovered something with this "new" way of writing getters and setters.
     When writing regular getters and setters, you will modify the "fields" or
     "attributes" of the class itself (not inside the constructor).
@@ -58,6 +59,7 @@ COUNT WORDS
 ###########
 -   Initially, it seems like the counting of words does not happen
     as automatically as it does in Python.
+
 -   So, I found another function called "Contains" instead of using "Equals".
     Equals will compare the strings straight up while Contains will check if the 
     string contains the word that we are looking for.
@@ -67,6 +69,7 @@ THOUGHTS AFTER COMPLETION
 #########################
 -   Now, while writing, I have completed the program itself. It works the same way as the 
     Python version, but I have not made the unit tests yet.
+
 -   All in all, the architecture is pretty much maintained between the languages with some 
     small differences.
 
@@ -84,6 +87,20 @@ THOUGHTS AFTER COMPLETION
 TESTING
 #######
 -   I'm using xunit for the unit tests.
+
+-   I separate the test cases into separate files. So each test file will 
+    correlate to a .cs file.
+
+-   When I create unit tests, I try to separate the tests into new functions.
+    Let me give you an example.
+    In the Files.cs, we have the separators, which could be tested with 4 different asserts
+    in the same function, but the downside is that it could become harder to read
+    a fault report if there are several test cases/asserts in one test function.
+
+-   There is a lot of copy paste code in the test cases. I could do it parameterized
+    but due to time constraint, I will leave that for another day.
+    Just pointing out why I chose to not follow DRY concepts when doing the unit tests.
+
 -   Installing the xunit package.
     1. CWD is the dir where you have the csproj file
     2. run this command: dotnet add package xunit
