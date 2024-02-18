@@ -112,3 +112,4 @@ COMMANDS
 -   dotnet build = build the project
 -   dotnet clean = clean build outputs of a .NET project.
 -   dotnet restore = when you do a change in the dependencies document
+-   dotnet test - run the unit tests
