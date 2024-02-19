@@ -5,6 +5,10 @@ what differences I could find.
 
 This is what I found.
 
+KEEP IN MIND that these notes came from the top of my head while writing code and I realize
+that sometimes my thoughts does not even make sense to myself when I come back to some text that
+I wrote a few weeks ago :D
+
 STRINGS
 #######
     Python: It's very common to use single quotation marks like this ' for strings.
@@ -69,6 +73,7 @@ THOUGHTS AFTER COMPLETION
 #########################
 -   Now, while writing, I have completed the program itself. It works the same way as the 
     Python version, but I have not made the unit tests yet.
+    Edit: I didn't use the same kind of --help as I use in Python.
 
 -   All in all, the architecture is pretty much maintained between the languages with some 
     small differences.
@@ -76,19 +81,19 @@ THOUGHTS AFTER COMPLETION
 -   I'm used to work with VS Code when programming and I wanted to use VS Code when doing
     C# also.
     I'm pretty sure that Visual Studio would be a lot easier to start with.
-    It took a bit of time to setup VS Code to function with debugging and so on.
+    It took a bit of time to setup VS Code to function with debugging and to run tests.
     The effectiveness of cleaning and compiling/building the project with the help
     of a terminal (bash) can of course be improved.
     
 -   I wanted to do one F# version also, but my time is limited, so I will 
-    have to do the F# version later.
+    have to do the F# version later, or maybe create another simple project with it.
 
 
 TESTING
 #######
 -   I'm using xunit for the unit tests.
 
--   I separate the test cases into separate files. So each test file will 
+-   I separate the production code files into separate test files. So each test file will 
     correlate to a .cs file.
 
 -   When I create unit tests, I try to separate the tests into new functions.
@@ -106,10 +111,14 @@ TESTING
     2. run this command: dotnet add package xunit
     3. After modifying/adding packages, run: dotnet restore
 
+-   I managed to run testing with coverlet.collector once. Then I had a about a weeks break, and
+    when I came back, it completely refused to create a new run with that, so I completely skipped
+    that now... It bothers me a bit, so I will probably have looked into it before you even read this.
+
 
 COMMANDS
 ########
 -   dotnet build = build the project
 -   dotnet clean = clean build outputs of a .NET project.
 -   dotnet restore = when you do a change in the dependencies document
--   dotnet test - run the unit tests
+-   dotnet test = run the unit tests

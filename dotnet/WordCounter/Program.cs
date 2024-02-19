@@ -7,7 +7,20 @@ namespace WordCounter
     {
         static void Main(string[] args)
         {
-            bool validArgument = InputArgument.IsValidArgument(args);
+            bool validArgument = false;
+
+            try
+            {  
+                validArgument = InputArgument.IsValidArgument(args);
+            }
+            catch(ArgumentException ae)
+            {
+                Console.WriteLine($"Error: {ae.Message}");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine($"Error: {e.Message}");
+            }
 
             if(validArgument == true)
             {

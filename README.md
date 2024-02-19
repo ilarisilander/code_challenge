@@ -5,11 +5,28 @@ the file name appears in the text file.
 # Table of contents
 <!--ts-->
    * [Table of contents](#table-of-contents)
+   * [Important Information](#important-information)
    * [The Challenge](#the-challenge)
-   * [Pre-requisites](#pre-requisites)
-   * [Installation](#installation)
-   * [How to](#how-to)
+   * [Python: Pre-requisites](#python-pre-requisites)
+   * [Dotnet: Pre-requisites](#dotnet-pre-requisites)
+   * [Python: Installation](#python-installation)
+   * [Dotnet: Installation](#dotnet-installation)
+   * [Python: How to](#python-how-to)
+   * [Dotnet: How to](#dotnet-how-to)
 <!--te-->
+
+# Important Information
+  ### Sections
+  I created some sections in this readme. If you just want to jump into the program, then you can skip to Pre-requisites, Installation and How to. If you want to read about my thoughts and the design, then keep reading.
+
+  ### Python
+  Python is my main language so every choice regarding how the program was going to be built, was made with Python in mind.
+
+  ### Dotnet
+  Initially, I was going to make this only in Python, but I was curious about C# since I have never ever used it before.
+  Not only that, I wanted to use Visual Studio Code instead of going the "easy" route using Visual Studio.
+  A lot of time went into making sure that VS Code would work good enough to be able to debug properly and run test cases.
+  There is a **dotnet_notes.txt** in dotnet/files where I have written my thoughts about C# and also how it was 
 
 # The Challenge
   ### Instructions
@@ -17,7 +34,9 @@ the file name appears in the text file.
   Open that file and count how many times its filename (minus the file extension) occurs in the file's contents.
   Example: If the argument is "myfile.txt" it should count how many times the string "myfile" occurs in it.
 
-  * ##### In the task instructions, there was a lot about C# and F#, but I was recommended to use my strongest programming language
+  * ##### In the task instructions, there was a lot about C# and F#, but I was recommended to use my strongest programming language. So these thoughts about the program architecture is mainly for Python and then I have tried to convert the code into C#.
+  
+  Note that I am not a C# developer, nor have I ever programmed in C#, so this was a fun project.
 
   ### My thoughts about the requirements and instructions
   * #### Input arguments
@@ -62,14 +81,21 @@ the file name appears in the text file.
     * To check that the file has .txt as extension
     * The user could add a path with spaces in the file name
 
-# Pre-requisites
+# Python: Pre-requisites
 * Python 3.8 or higher
 * GIT
 * A text file with a name and a .txt prefix.
 
 Download Python [here](https://www.python.org/downloads/)
 
-# Installation
+# Dotnet: Pre-requisites
+* .NET SDK
+* GIT
+* A text file with a name and a .txt prefix.
+
+Download .NET SDK [here](https://dotnet.microsoft.com/en-us/download)
+
+# Python: Installation
 Download the necessary files
 ```bash
 git clone https://github.com/ilarisilander/code_challenge.git
@@ -81,7 +107,24 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-# How to
+# Dotnet: Installation
+Download the necessary files
+```bash
+git clone https://github.com/ilarisilander/code_challenge.git
+cd code_challenge/Dotnet/WordCounter
+```
+
+Restore Dependencies
+```bash
+dotnet restore
+```
+
+Build Project
+```bash
+dotnet build
+```
+
+# Python: How to
 There are some files in /code_challenge/files to use unless you want to create your own files.
 
 ### Help in the application
@@ -112,4 +155,26 @@ Given that you are in the root folder of the project (code_challenge)
 * Run without coverage (all files)
   ```bash
   python -m unittest tests/test*
+  ```
+
+# Dotnet: How to
+There are some files in /code_challenge/files to use unless you want to create your own files.
+
+### Change directory to the executable
+From the code_challenge root directory
+```bash
+cd dotnet/WordCounter/bin/Debug/net8.0
+```
+
+### Add a text file path as argument
+
+```bash
+WordCounter.exe c:/path/to/text_file.txt
+```
+
+### Run the test cases
+Given that you are in the project folder (code_challenge/dotnet/WordCounter/)
+* Run test files
+  ```bash
+  dotnet test
   ```
